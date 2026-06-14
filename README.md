@@ -51,14 +51,60 @@
 
 > 화면 캡처는 추후 추가 예정입니다.
 
-## ERD 핵심 관계
+## ERD
 
-```
-TB_USER 1 ── N TB_BOOKING        (회원별 예약)
-TB_FLIGHT 1 ── N TB_BOOKING      (GO_FLIGHT_ID / BACK_FLIGHT_ID — 가는편·오는편 각각 FK, 왕복 처리)
-TB_BOOKING 1 ── N TB_PASSENGER   (한 예약에 여러 승객)
-TB_BOOKING 1 ── N TB_SEAT        (예약별 좌석)
-TB_BOOKING 1 ── N TB_BAGGAGE     (예약별 추가 수하물)
+```mermaid
+erDiagram
+  TB_USER ||--o{ TB_BOOKING : "예약"
+  TB_AIRPORT ||--o{ TB_FLIGHT : "출발공항"
+  TB_AIRPORT ||--o{ TB_FLIGHT : "도착공항"
+  TB_FLIGHT ||--o{ TB_BOOKING : "가는편"
+  TB_FLIGHT ||--o{ TB_BOOKING : "오는편"
+  TB_BOOKING ||--o{ TB_PASSENGER : "승객"
+  TB_BOOKING ||--o{ TB_SEAT : "좌석"
+  TB_BOOKING ||--o{ TB_BAGGAGE : "수하물"
+
+  TB_USER {
+    string USER_ID PK
+    string USER_EMAIL
+  }
+  TB_AIRPORT {
+    string AIRPORT_CODE PK
+    string AIRPORT_NAME
+  }
+  TB_FLIGHT {
+    number FLIGHT_ID PK
+    string FLIGHT_NO
+    string DEP_AIRPORT FK
+    string ARR_AIRPORT FK
+    string SEAT_CLASS
+  }
+  TB_BOOKING {
+    number BOOKING_ID PK
+    string USER_ID FK
+    number GO_FLIGHT_ID FK
+    number BACK_FLIGHT_ID FK
+    string TRIP_TYPE
+    number TOTAL_PRICE
+  }
+  TB_PASSENGER {
+    number PASSENGER_ID PK
+    number BOOKING_ID FK
+    string ENG_LAST_NAME
+    string ENG_FIRST_NAME
+  }
+  TB_SEAT {
+    number SEAT_ID PK
+    number BOOKING_ID FK
+    number FLIGHT_ID FK
+    string SEAT_NO
+  }
+  TB_BAGGAGE {
+    number BAGGAGE_ID PK
+    number BOOKING_ID FK
+    number FLIGHT_ID FK
+    number EXTRA_BAGGAGE
+  }
 ```
 
 ## 더 알아보기
