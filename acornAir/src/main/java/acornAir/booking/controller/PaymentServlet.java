@@ -81,21 +81,22 @@ public class PaymentServlet extends HttpServlet {
 		try {
 			String payMethod = req.getParameter("payMethod");
 
+			// [개선] 결제 금액은 클라이언트가 이 시점에 다시 보낸 값으로 재계산하지 않는다.
+			// 좌석 선택(SeatServlet) -> 수하물 선택(BaggageServlet) 단계를 거치며
+			// 서버에서 계산한 결과가 이미 세션의 BookingDTO(basePrice/baggagePrice/totalPrice)에
+			// 저장되어 있으므로, 결제 단계에서는 그 값을 그대로 사용한다.
 			int bags = 0;
-			String bagsParam = req.getParameter("bags");
-			if (bagsParam != null && !bagsParam.isEmpty()) {
-				bags = Integer.parseInt(bagsParam);
+			Object bagsAttr = session.getAttribute("bags");
+			if (bagsAttr instanceof Integer) {
+				bags = (Integer) bagsAttr;
 			}
 
-			int bagPrice = 40000;
-			int baggagePrice = bags * bagPrice;
-
-			int basePrice = bookingDTO.getBasePrice();
-			int totalPrice = basePrice + baggagePrice;
+			int baggagePrice = bookingDTO.getBaggagePrice();
+			int totalPrice = bookingDTO.getTotalPrice();
 
 			bookingDTO.setPayMethod(payMethod);
-			bookingDTO.setBaggagePrice(baggagePrice);
-			bookingDTO.setTotalPrice(totalPrice);
+			// baggagePrice / totalPrice는 BaggageServlet 단계에서 이미 BookingDTO에 반영되어
+			// 있으므로 여기서는 별도로 설정(덮어쓰기)하지 않는다.
 
 			String contactPhone = (String) session.getAttribute("contactPhone");
 
