@@ -1,7 +1,7 @@
 # ✈️ AcornAir — 항공권 예약 웹 서비스
 
 > Acorn Academy 팀 프로젝트(2026.04.28 ~ 05.14)를 기반으로 한 개인 포트폴리오 저장소입니다.
-> 팀 제출 원본 저장소: `((https://github.com/minjeong333/AcornAIr.git)`
+> 팀 제출 원본 저장소: [AcornAIr](https://github.com/minjeong333/AcornAIr.git)
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
 ![JSP](https://img.shields.io/badge/JSP-339933?style=flat)
@@ -22,18 +22,24 @@
 - **인원**: 5인 (장윤성, 고지연, 여도현, 김민정, 김민경)
 - **아키텍처**: MVC 패턴 (Controller - Service - DAO)
 
-## 담당 역할 (김민정)
+## 담당 기능 (김민정)
 
-예약 흐름의 후반부 — **승객정보 입력 → 좌석 배정 → 추가 수하물 → 결제** — 전체를 담당했습니다.
-그 외에 git 협업 관리(브랜치/PR 워크플로우, 79건 커밋)와 기획명세서 작성도 함께 진행했습니다.
+예약 후반부 흐름인 **승객정보 입력 → 좌석 배정 → 추가 수하물 → 결제** 구간을 구현했습니다.
+README에는 구현 범위와 관련 파일을 중심으로 정리하고, 협업/회고 내용은 별도 문서로 분리했습니다.
 
-| 영역 | 파일 |
-|---|---|
-| 승객정보 입력 | `PassengerServlet`, `passenger_info.jsp/js/css` |
-| 좌석 배정 | `SeatServlet`, `seatSelect.jsp/css` |
-| 추가 수하물 | `BaggageServlet`, `baggage.jsp` |
-| 결제 | `PaymentServlet`, `PaymentService`, `payment.jsp` |
-| 예약 내역 조회 (일부) | `ReservationDAO` (LISTAGG/GROUP BY 수정) |
+| 기능 | 구현 내용 | 관련 파일 |
+|---|---|---|
+| 승객정보 입력 | 승객 수에 따른 다중 입력 폼 생성, 연락처 정보 세션 저장 | `PassengerServlet`, `passenger_info.jsp/js/css` |
+| 좌석 배정 | 가는편/오는편 좌석 선택, 예약 좌석 비활성화, 승객 수와 선택 좌석 수 검증 | `SeatServlet`, `seatSelect.jsp/css` |
+| 추가 수하물 | 수하물 개수별 추가 요금 계산, 예약 정보 반영 | `BaggageServlet`, `baggage.jsp` |
+| 결제 | 예약/승객/좌석/수하물 데이터 트랜잭션 일괄 저장 | `PaymentServlet`, `PaymentService`, `payment.jsp` |
+| 예약 내역 조회 일부 | 1:N JOIN 중복으로 인한 승객명/좌석번호 누락 문제 수정 | `ReservationDAO` |
+
+**협업 기록**
+
+- Git feature/fix 브랜치와 PR 기반 병합 흐름 사용
+- 기획명세서 작성 참여
+- 개인 포트폴리오 저장소 기준 커밋 이력 정리
 
 ## 기술 스택
 
