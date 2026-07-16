@@ -11,6 +11,8 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
+![결제 화면](docs/images/04_payment.png)
+
 ---
 
 ## 프로젝트 개요
@@ -19,8 +21,10 @@
 항공 예약 시스템을 Java/JSP/Servlet + Oracle DB로 구현한 5인 팀 프로젝트입니다.
 
 - **기간**: 2026.04.28 ~ 2026.05.14 (개발 9일 + 발표)
-- **인원**: 5인 (장윤성, 고지연, 여도현, 김민정, 김민경)
+- **인원**: 5인 팀 프로젝트
 - **아키텍처**: MVC 패턴 (Controller - Service - DAO)
+  
+> **핵심 성과**: 발표 이후 코드를 다시 리뷰하다 결제 단계에서 클라이언트가 보낸 수하물 개수로 결제 금액을 한 번 더 계산하는 구조적 취약점을 발견했습니다. 요청값을 조작하면 최종 금액이 바뀔 수 있는 구조였고, 서버 세션에 이미 저장된 금액을 그대로 사용하도록 개선했습니다. → [상세 내용](docs/IMPROVEMENTS.md)
 
 ## 담당 기능 (김민정)
 
@@ -77,6 +81,9 @@ README에는 구현 범위와 관련 파일을 중심으로 정리하고, 협업
 
 ## ERD
 
+<details>
+<summary>ERD 펼쳐보기</summary>
+
 ```mermaid
 erDiagram
   TB_USER ||--o{ TB_BOOKING : "예약"
@@ -130,6 +137,16 @@ erDiagram
     number EXTRA_BAGGAGE
   }
 ```
+
+</details>
+
+## 코드 참고 안내
+
+> 이 저장소는 실행 가능한 배포본이 아니라, 담당 기능을 살펴보기 위한 코드 발췌본입니다. 배포 서술자(web.xml)와 빌드 설정 파일은 포함돼 있지 않습니다.
+
+- **개발 환경**: Java, Apache Tomcat, Oracle DB
+- **DB 연동**: Oracle Thin 드라이버(`ojdbc8.jar`, `WEB-INF/lib`에 포함)를 사용하며, 연결 정보는 `acornAir/src/main/java/acornAir/util/DBUtil.java`에 있습니다
+- **코드 확인**: 위 "담당 기능" 표에 정리된 클래스명을 기준으로 `acornAir/src/main/java` 아래에서 바로 확인할 수 있습니다
 
 ## 더 알아보기
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcornAir — 항공권 예약 웹 서비스</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <p class="eyebrow">Acorn Academy 팀 프로젝트 (2026.04.28 ~ 05.14)</p>
+    <h1>✈️ AcornAir</h1>
+    <p class="lead">대한항공 웹사이트를 레퍼런스로 만든 항공권 예약 시스템.<br>검색부터 좌석 선택, 결제, 예약 조회까지 이어지는 흐름을 5인 팀이 구현했습니다.</p>
+    <div class="badges">
+      <span class="badge java">Java</span>
+      <span class="badge jsp">JSP</span>
+      <span class="badge servlet">Servlet</span>
+      <span class="badge oracle">Oracle</span>
+      <span class="badge html">HTML5</span>
+      <span class="badge css">CSS3</span>
+      <span class="badge js">JavaScript</span>
+    </div>
+    <div class="cta">
+      <a href="https://github.com/minjeong333/AcornAir-portfolio" class="btn btn-primary" target="_blank" rel="noopener">GitHub 저장소</a>
+      <a href="#features" class="btn btn-ghost">담당 기능 보기</a>
+    </div>
+  </div>
+</header>
+
+<section class="section overview">
+  <div class="container">
+    <h2>프로젝트 개요</h2>
+    <p>항공편 검색 → 좌석 선택 → 결제 → 예약 조회로 이어지는 항공 예약 시스템을 Java/JSP/Servlet + Oracle DB로 구현했습니다.
+    아키텍처는 MVC 패턴(Controller - Service - DAO)을 따랐고, 팀 5명(장윤성, 고지연, 여도현, 김민정, 김민경)이 함께 만들었습니다.</p>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <h2>담당 기능 — 김민정</h2>
+    <p class="section-desc">예약 후반부 흐름인 <strong>승객정보 입력 → 좌석 배정 → 추가 수하물 → 결제</strong> 구간을 구현했습니다.</p>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <img src="../docs/images/01_passenger_info.png" alt="승객정보 입력 화면">
+        <h3>1. 승객정보 입력</h3>
+        <p>승객 수(<code>passCnt</code>)에 따라 입력 폼을 동적으로 생성하고, 연락처 정보를 세션에 저장합니다.</p>
+        <p class="files"><code>PassengerServlet</code> · <code>passenger_info.jsp/js/css</code></p>
+      </article>
+
+      <article class="feature-card">
+        <img src="../docs/images/02_seat_select.png" alt="좌석 배정 화면">
+        <h3>2. 좌석 배정</h3>
+        <p>가는편/오는편 좌석을 선택하고, 이미 예약된 좌석은 비활성화합니다. 승객 수와 선택 좌석 수를 검증합니다.</p>
+        <p class="files"><code>SeatServlet</code> · <code>seatSelect.jsp/css</code></p>
+      </article>
+
+      <article class="feature-card">
+        <img src="../docs/images/03_baggage.png" alt="추가 수하물 화면">
+        <h3>3. 추가 수하물</h3>
+        <p>수하물 개수별 추가 요금을 계산해 예약 정보에 반영합니다.</p>
+        <p class="files"><code>BaggageServlet</code> · <code>baggage.jsp</code></p>
+      </article>
+
+      <article class="feature-card">
+        <img src="../docs/images/04_payment.png" alt="결제 화면">
+        <h3>4. 결제</h3>
+        <p>결제 시점에 예약·승객·좌석·수하물 데이터를 트랜잭션으로 일괄 저장합니다.</p>
+        <p class="files"><code>PaymentServlet</code> · <code>PaymentService</code> · <code>payment.jsp</code></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section stack">
+  <div class="container">
+    <h2>기술 스택</h2>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <h4>Backend</h4>
+        <p>Java, Servlet, JSP (MVC 패턴)</p>
+      </div>
+      <div class="stack-item">
+        <h4>Database</h4>
+        <p>Oracle — TB_USER, TB_FLIGHT, TB_AIRPORT, TB_BOOKING, TB_PASSENGER, TB_SEAT, TB_BAGGAGE, CHATBOT_DATA (8개 테이블)</p>
+      </div>
+      <div class="stack-item">
+        <h4>Frontend</h4>
+        <p>HTML, CSS, JavaScript — 모달/iframe 단계 전환 + <code>postMessage</code> 통신</p>
+      </div>
+      <div class="stack-item">
+        <h4>협업</h4>
+        <p>Git feature/fix 브랜치 전략, PR 리뷰·머지, 79건 커밋</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section docs">
+  <div class="container">
+    <h2>더 알아보기</h2>
+    <div class="doc-grid">
+      <a class="doc-card" href="https://github.com/minjeong333/AcornAir-portfolio/blob/main/docs/TROUBLESHOOTING.md" target="_blank" rel="noopener">
+        <span class="doc-icon">🔧</span>
+        <h4>트러블슈팅</h4>
+        <p>1:N JOIN으로 인한 행 증가와 LISTAGG 중복 문제를 진단하고 해결한 과정</p>
+      </a>
+      <a class="doc-card" href="https://github.com/minjeong333/AcornAir-portfolio/blob/main/docs/IMPROVEMENTS.md" target="_blank" rel="noopener">
+        <span class="doc-icon">🚀</span>
+        <h4>발표 이후 개선</h4>
+        <p>결제 단계에서 클라이언트 입력을 재신뢰하던 금액 재계산 로직 제거</p>
+      </a>
+      <a class="doc-card" href="https://github.com/minjeong333/AcornAir-portfolio/blob/main/docs/RETROSPECTIVE.md" target="_blank" rel="noopener">
+        <span class="doc-icon">💭</span>
+        <h4>회고</h4>
+        <p>잘된 점, 아쉬운 점, 다음에 적용하고 싶은 것</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>Acorn Academy 팀 프로젝트를 기반으로 한 개인 포트폴리오 저장소입니다.</p>
+    <p><a href="https://github.com/minjeong333/AcornAIr" target="_blank" rel="noopener">팀 제출 원본 저장소 →</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
