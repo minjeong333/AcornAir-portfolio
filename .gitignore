@@ -87,3 +87,6 @@ Thumbs.db
 
 acornAir/src/main/webapp/WEB-INF/lib/jstl-1.2.jar
 acornAir/src/main/webapp/WEB-INF/lib/ojdbc8.jar
+
+# Claude Code local config
+.claude/
